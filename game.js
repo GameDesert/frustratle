@@ -121,35 +121,55 @@ function backspace() {
 
 function checkLetters() {
     if (enteredLetters.length == 5) {
+        let appearedLetters = word.split("");
+        let greenFound = [1,2,3,4,5]
         console.log(word)
-        if (enteredLetters[0] == word.charAt(0)) {
+        if (enteredLetters[0] == appearedLetters[0]) {
+            var position = appearedLetters.indexOf(enteredLetters[0], 0);
+            appearedLetters.splice(position, 1);
+            greenFound.splice(position, 1);
             document.getElementById(`r${currentLevel}c1td`).style.backgroundColor = "#3afc7e";
-        } else if (word.includes(enteredLetters[0])) {
-            document.getElementById(`r${currentLevel}c1td`).style.backgroundColor = "#fcd23a";
         }
 
-        if (enteredLetters[1] == word.charAt(1)) {
+        if (enteredLetters[1] == appearedLetters[1]) {
+            var position = appearedLetters.indexOf(enteredLetters[1], 0);
+            appearedLetters.splice(position, 1, "*");
+            greenFound.splice(position, 1);
             document.getElementById(`r${currentLevel}c2td`).style.backgroundColor = "#3afc7e";
-        } else if (word.includes(enteredLetters[1])) {
-            document.getElementById(`r${currentLevel}c2td`).style.backgroundColor = "#fcd23a";
         }
 
-        if (enteredLetters[2] == word.charAt(2)) {
+        if (enteredLetters[2] == appearedLetters[2]) {
+            var position = appearedLetters.indexOf(enteredLetters[2], 0);
+            appearedLetters.splice(position, 1, "*");
+            greenFound.splice(position, 1);
             document.getElementById(`r${currentLevel}c3td`).style.backgroundColor = "#3afc7e";
-        } else if (word.includes(enteredLetters[2])) {
-            document.getElementById(`r${currentLevel}c3td`).style.backgroundColor = "#fcd23a";
         }
 
-        if (enteredLetters[3] == word.charAt(3)) {
+        if (enteredLetters[3] == appearedLetters[3]) {
+            var position = appearedLetters.indexOf(enteredLetters[3], 0);
+            appearedLetters.splice(position, 1, "*");
+            greenFound.splice(position, 1);
             document.getElementById(`r${currentLevel}c4td`).style.backgroundColor = "#3afc7e";
-        } else if (word.includes(enteredLetters[3])) {
-            document.getElementById(`r${currentLevel}c4td`).style.backgroundColor = "#fcd23a";
         }
 
-        if (enteredLetters[4] == word.charAt(4)) {
+        if (enteredLetters[4] == appearedLetters[4]) {
+            var position = appearedLetters.indexOf(enteredLetters[4], 0);
+            appearedLetters.splice(position, 1, "*");
+            greenFound.splice(position, 1);
             document.getElementById(`r${currentLevel}c5td`).style.backgroundColor = "#3afc7e";
-        } else if (word.includes(enteredLetters[4])) {
-            document.getElementById(`r${currentLevel}c5td`).style.backgroundColor = "#fcd23a";
+            console.log(appearedLetters);
+            console.log(greenFound);
+        }
+
+        for (let charposition = 0; charposition < greenFound.length;) {
+            if (appearedLetters.join("").includes(enteredLetters[greenFound[charposition]])) {
+                var position = appearedLetters.indexOf(enteredLetters[greenFound[charposition]], 0);
+                appearedLetters.splice(position, 1, "*");
+                document.getElementById(`r${currentLevel}c1td`).style.backgroundColor = "#fcd23a";
+                console.log(appearedLetters);
+                console.log(greenFound);
+                charposition += 1;
+            }
         }
 
         if (word == enteredLetters.join("")) {
@@ -172,7 +192,7 @@ function checkLetters() {
 function enter() {
     if (enteredLetters.length == 5) {
         checkLetters()
-        if (currentLevel < 5) {
+        if (currentLevel < 6) {
             enteredLetters = []
             currentLevel += 1
         }
@@ -233,8 +253,6 @@ function refresh() {
 }
 
 function startGame() {
-        unhideElement("game");
-        hideElement("startGame");
         chooseInput();
         var keys = Object.keys(wordlist);
         word = wordlist[keys[ keys.length * Math.random() << 0]];
@@ -252,9 +270,9 @@ function rotarySubmitLetters(id) {
         var letterAngles = {"home":-41.25,"a":19,"b":30.25,"c":41.5,"d":52.75,"e":64,"f":75.25,"g":86.5,"h":97.75,"i":109,"j":120.25,"k":131.5,"l":142.75,"m":154,"n":165.25,"o":176.5,"p":187.75,"q":199,"r":210.25,"s":221.5,"t":232.75,"u":244,"v":255.25,"w":266.5,"x":277.75,"y":289,"z":300.25,"enter":311.5}
         var rotaryletters = document.getElementById("rotaryletters");
         var rotletter = id;
-        rotaryletters.style.transition = `10s`;
+        rotaryletters.style.transition = `5s`;
         rotaryletters.style.transform = `rotate(${letterAngles[id]}deg)`;
-        sleep(10000).then(() => {
+        sleep(5000).then(() => {
             console.log(rotletter);
             submitLetter(rotletter);
             rotaryletters.style.transition = "1s";

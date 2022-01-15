@@ -23,6 +23,18 @@
     <!--SHARE INFO END-->
     <script src="game.js"></script>
     <style>
+        @font-face {
+            font-family: 'Source Code Pro';
+            src: url('fonts/Source_Code_Pro/SourceCodePro-VariableFont_wght.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Source Code Pro';
+            src: url('fonts/Source_Code_Pro/SourceCodePro-Italic-VariableFont_wght.ttf') format('truetype');
+            font-weight: normal;
+            font-style: italic;
+        }
         body {
             margin: 0;
             overflow-x: hidden;
@@ -105,7 +117,7 @@
     </style>
 </head>
 <!--hideElement('rotaryPhoneDIV'); hideElement('randomLetter'); hideElement('binaryInput'); hideElement('keyboardContainer'); hideElement('passwordKeyboard'); hideElement('slider'); hideElement('scramble'); hideElement('higherlower');-->
-<body onload="hideElement('rotaryPhoneDIV'); hideElement('randomLetter'); hideElement('binaryInput'); hideElement('passwordKeyboard'); hideElement('slider'); hideElement('scramble'); hideElement('higherlower'); hideElement('keyboardContainer'); hideElement('passwordInput')">
+<body onload="hideElement('rotaryPhoneDIV'); hideElement('randomLetter'); hideElement('binaryInput'); hideElement('passwordKeyboard'); hideElement('slider'); hideElement('scramble'); hideElement('higherlower'); hideElement('keyboardContainer'); hideElement('passwordInput'); hideElement('shareSheet'); startGame();">
     <div class="game">
         <div class="gameoutput">
             <table class="gameOutput">

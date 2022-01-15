@@ -4,7 +4,7 @@ lineformat = '{}:"{},"'
  
 # Using readline()
 sourceFile = open('words_alpha.txt', 'r')
-count = 157
+count = 260
 targetFile = open('wordlist.json', 'a')
 
 while True:
@@ -25,17 +25,17 @@ while True:
 sourceFile.close()
 targetFile.close()
 
-# FINISHED AT BAAED (first B-word)
+# FINISHED AT CAABA (first C-word)
+# Baked
+# -bails +bales
+# Baron
+# Begun
+# Beech
+# - Booze
+# Boron
 # 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
+# Bunch
+# ? - Burps
 # 
 # 
 # 
