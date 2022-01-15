@@ -1,0 +1,20 @@
+Frustratle
+
+“The overly-complicated, kafkaesque word game.”
+
+Inputs:
+DONE * Rotary Phone
+DONE * Random Letter Button
+DONE * Binary Input
+DONE * Ridiculous Password Creation Box To Type Next Letter
+    * Must have (large number) or more letters.
+    * Password cannot exceed (large number+1) letters.
+    * Must contain Cyrillic Characters.
+DONE * slider to pick letter, but they're in a random order
+IGNORE * shitty Captcha
+* white on light-grey text keyboard
+IGNORE * Keyboard made up of IPA sounds only
+* Old mobile phone dialler (with several letters per number)
+* Letters scroll by. Correct letter must be pressed when in crosshairs.
+DONE * Keyboard scrambles after every key.
+DONE* Higher/lower - play your cards right.
