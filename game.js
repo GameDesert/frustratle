@@ -233,6 +233,8 @@ function refresh() {
 }
 
 function startGame() {
+        unhideElement("game");
+        hideElement("startGame");
         chooseInput();
         var keys = Object.keys(wordlist);
         word = wordlist[keys[ keys.length * Math.random() << 0]];
