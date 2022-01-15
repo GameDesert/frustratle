@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frustratle</title>
+    <!--SHARE INFO START-->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Frustratle">
+    <meta name="twitter:description" content="FRUSTRATLE - The overly-complicated, kafkaesque word game.">
+    <meta name="twitter:image" content="https://frustratle.kotla.eu/images/share_image_twitter.png">
+
+    <meta property="og:title" content="Frustratle" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://frustratle.kotla.eu/" />
+    <meta property="og:image" content="http://frustratle.kotla.eu/images/share_image_fb.png" />
+    <meta property="og:image:secure_url" content="https://frustratle.kotla.eu/images/share_image_fb.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="628" />
+    <meta property="og:image:alt" content="FRUSTRATLE - The overly-complicated, kafkaesque word game." />
+    <!--SHARE INFO END-->
+    <script src="game.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow-x: hidden;
+            padding: 0;
+        }
+        .rotaryletters {
+            transform-origin: 50% 50%;
+        }
+        .game {
+            display: grid;
+            grid-template-columns: 50vw 50vw;
+        }
+        .gameinput {
+                overflow-y: scroll;
+        }
+        @media screen and (min-aspect-ratio: 2/1.5) {
+            .gameinput {
+                overflow-y: scroll;
+            }
+        }
+        .binaryGuide {
+            border: 1px solid rgb(255, 255, 255);
+            border-collapse: collapse;
+            margin-left: auto; margin-right: auto;
+        }
+        .binaryGuide > th, td {
+            border: 1px solid rgb(255, 255, 255);
+            border-collapse: collapse;
+        }
+        .binaryGuide > td {
+            padding: 2vw;
+        }
+        .keyboardGridButton {
+            width: 3.5vw;
+            cursor: pointer; padding: 1vw 1vw; background-color: #000014; color: #ffffff; border: solid #ffffff; border-radius: 1vw; font-size: 1.5vw;
+        }
+        .submitPasswordButton, .submitSliderButton, .pylrButton {
+            display: block; margin-left: auto; margin-right: auto; cursor: pointer; padding: 1vw 1vw; background-color: #000014; color: #ffffff; border: solid #ffffff; border-radius: 1vw; font-size: 1.5vw;
+        }
+        .gameoutput {
+            display: block;
+            margin-left: auto; margin-right: auto;
+            border-spacing: 0 0;
+            padding: 0;
+            table-layout:fixed;
+            overflow-y: hidden;
+        }
+        .gameoutput > tr {
+            height: 5vw;
+            max-height: 5vw;
+            margin: 0;
+            padding: 0;
+            overflow-y: hidden;
+            table-layout:fixed;
+        }
+        .gameoutput > th, td {
+            border: 0.15vw solid #000014;
+            border-collapse: collapse;
+            width: 5vw;
+            max-width: 5vw;
+            height: 5vw;
+            max-height: 5vw;
+            border-spacing: 0 0;
+            margin: 0;
+            padding: 0;
+            overflow-y: hidden;
+            table-layout:fixed;
+        }
+        .controlButton {
+            width: 5vw; height: 5vw; text-align: center; cursor: pointer; padding: 1vw 1vw; background-color: #fff; color: #000014; border: solid #000014; border-radius: 1vw; font-size: 2vw;
+        }
+        .gameOutputLetter {
+            font-size: 3vw;
+            font-family: 'Source Code Pro', 'Courier New', Courier, monospace;
+            color: #000014;
+            text-align: center;
+            position: relative;
+            margin: 0;
+        }
+    </style>
+</head>
+<!--hideElement('rotaryPhoneDIV'); hideElement('randomLetter'); hideElement('binaryInput'); hideElement('keyboardContainer'); hideElement('passwordKeyboard'); hideElement('slider'); hideElement('scramble'); hideElement('higherlower');-->
+<body onload="hideElement('rotaryPhoneDIV'); hideElement('randomLetter'); hideElement('binaryInput'); hideElement('passwordKeyboard'); hideElement('slider'); hideElement('scramble'); hideElement('higherlower'); hideElement('keyboardContainer'); hideElement('passwordInput')">
+    <div class="game">
+        <div class="gameoutput">
+            <table class="gameOutput">
+                <tr>
+                    <td id="r1c1td"><p class="gameOutputLetter" id="r1c1"></p></td>
+                    <td id="r1c2td"><p class="gameOutputLetter" id="r1c2"></p></td>
+                    <td id="r1c3td"><p class="gameOutputLetter" id="r1c3"></p></td>
+                    <td id="r1c4td"><p class="gameOutputLetter" id="r1c4"></p></td>
+                    <td id="r1c5td"><p class="gameOutputLetter" id="r1c5"></p></td>
+                </tr>
+                <tr>
+                    <td id="r2c1td"><p class="gameOutputLetter" id="r2c1"></p></td>
+                    <td id="r2c2td"><p class="gameOutputLetter" id="r2c2"></p></td>
+                    <td id="r2c3td"><p class="gameOutputLetter" id="r2c3"></p></td>
+                    <td id="r2c4td"><p class="gameOutputLetter" id="r2c4"></p></td>
+                    <td id="r2c5td"><p class="gameOutputLetter" id="r2c5"></p></td>
+                </tr>
+                <tr>
+                    <td id="r3c1td"><p class="gameOutputLetter" id="r3c1"></p></td>
+                    <td id="r3c2td"><p class="gameOutputLetter" id="r3c2"></p></td>
+                    <td id="r3c3td"><p class="gameOutputLetter" id="r3c3"></p></td>
+                    <td id="r3c4td"><p class="gameOutputLetter" id="r3c4"></p></td>
+                    <td id="r3c5td"><p class="gameOutputLetter" id="r3c5"></p></td>
+                </tr>
+                <tr>
+                    <td id="r4c1td"><p class="gameOutputLetter" id="r4c1"></p></td>
+                    <td id="r4c2td"><p class="gameOutputLetter" id="r4c2"></p></td>
+                    <td id="r4c3td"><p class="gameOutputLetter" id="r4c3"></p></td>
+                    <td id="r4c4td"><p class="gameOutputLetter" id="r4c4"></p></td>
+                    <td id="r4c5td"><p class="gameOutputLetter" id="r4c5"></p></td>
+                </tr>
+                <tr>
+                    <td id="r5c1td"><p class="gameOutputLetter" id="r5c1"></p></td>
+                    <td id="r5c2td"><p class="gameOutputLetter" id="r5c2"></p></td>
+                    <td id="r5c3td"><p class="gameOutputLetter" id="r5c3"></p></td>
+                    <td id="r5c4td"><p class="gameOutputLetter" id="r5c4"></p></td>
+                    <td id="r5c5td"><p class="gameOutputLetter" id="r5c5"></p></td>
+                </tr>
+                <tr>
+                    <td id="r6c1td"><p class="gameOutputLetter" id="r6c1"></p></td>
+                    <td id="r6c2td"><p class="gameOutputLetter" id="r6c2"></p></td>
+                    <td id="r6c3td"><p class="gameOutputLetter" id="r6c3"></p></td>
+                    <td id="r6c4td"><p class="gameOutputLetter" id="r6c4"></p></td>
+                    <td id="r6c5td"><p class="gameOutputLetter" id="r6c5"></p></td>
+                </tr>
+            </table>
+            <div class="controls" style="margin-left: auto; margin-right: auto; display: block;"><button onclick="refresh();" class="controlButton"><b>&#11118;</b></button><span style="margin-right: 11vw;"></span><button onclick="backspace();" class="controlButton"><b>&#8592;</b></button><button onclick="enter();" style="margin-left: 0.5vw; font-size: 2vw;" class="controlButton"><b>&#8629;</b></button></div>
+        </div>
+        <div style="background-color: #000014; width: 50vw; height: 100vh;" class="gameinput">
+            <div class="shareSheet" id="shareSheet">
+                <h2 style="font-size: 2vw; font-family: 'Source Code Pro', 'Courier New', Courier, monospace; color: #ffffff; text-align: center;">Well done!</h2>
+                <p>"I solved a Frustratle today. The word was █████!"</p>
+            </div>
+            <div class="rotaryPhone" id="rotaryPhoneDIV">
+                <h2 style="font-size: 2vw; font-family: 'Source Code Pro', 'Courier New', Courier, monospace; color: #ffffff; text-align: center;">"The Rotary Phone"</h2>
+                <svg
+                style="width: 40vw; height: 40vw; display: block; margin-left: auto; margin-right: auto;"
+                viewBox="0 0 135.46667 135.46667"
+                version="1.1"
+                id="rotaryPhone"
+                inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+                sodipodi:docname="rotary_a-o.svg"
+                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+                xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:svg="http://www.w3.org/2000/svg">
+                <defs
+                    id="defs2" />
+                <g
+                    inkscape:label="Layer 1"
+                    inkscape:groupmode="layer"
+                    id="layer1">
+                    <circle
+                    style="fill:#000000;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                    id="path846"
+                    cx="67.733337"
+                    cy="67.733337"
+                    r="67.733337" />
+                    <circle
+                    style="fill:#1a1a1a;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                    id="circle964"
+                    cx="67.733337"
+                    cy="67.733337"
+                    r="45.15556" />
+                    <circle
+                    style="fill:#ffffff;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                    id="circle984"
+                    cx="67.733337"
+                    cy="67.733337"
+                    r="4.2714744" />
+                    <g
+                    id="rotaryletters"
+                    class="rotaryletters"
+                    style="transform: rotate(-41.25deg); transition: 10s;">
+                    <g
+                        id="a" onclick="rotarySubmitLetters(this.id);">
+                        <circle
+                        style="fill:#ffffff;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                        id="circle5684"
+                        cx="67.705399"
+                        cy="-124.14984"
+                        r="4.4311285"
+                        transform="rotate(90)" />
+                        <g
+                        aria-label="A"
+                        transform="rotate(90)"
+                        id="text5688"
+                        style="font-weight:600;font-size:5.59817px;line-height:1.75;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Semi-Bold';stroke-width:0.264583">
+                        <path
+                            d="m 67.358309,-124.2674 -0.128758,0.44785 h 0.929296 l -0.128758,-0.44785 q -0.07837,-0.2911 -0.162347,-0.59341 -0.08397,-0.3079 -0.162347,-0.61579 h -0.02239 q -0.07837,0.30789 -0.162347,0.61579 -0.07838,0.30231 -0.162347,0.59341 z m -1.220401,1.94816 1.186812,-3.6612 h 0.761351 l 1.186812,3.6612 h -0.688575 l -0.279909,-0.99087 h -1.220401 l -0.285506,0.99087 z"
+                            style="text-align:center;text-anchor:middle"
+                            id="path32457" />
+                        </g>
+                    </g>
+                    <g
+                        id="b" onclick="rotarySubmitLetters(this.id);">
+                        <circle
+                        style="fill:#ffffff;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                        id="circle5772"
+                        cx="79.618576"
+                        cy="-109.6397"
+                        r="4.4311285"
+                        transform="rotate(78.750001)" />
+                        <g
+                        aria-label="B"
+                        transform="rotate(78.750001)"
+                        id="text5776"
+                        style="font-weight:600;font-size:5.59817px;line-height:1.75;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Semi-Bold';stroke-width:0.264583">
+                        <path
+                            d="m 78.305803,-107.8091 v -3.6612 h 1.136428 q 0.285507,0 0.52063,0.0504 0.240722,0.0448 0.408667,0.15115 0.173543,0.10077 0.268712,0.27431 0.100767,0.17355 0.100767,0.42546 0,0.26312 -0.156749,0.48705 -0.15115,0.22392 -0.475844,0.3079 v 0.0224 q 0.39747,0.0672 0.6102,0.27991 0.212731,0.21273 0.212731,0.5878 0,0.27431 -0.106366,0.47585 -0.100767,0.20153 -0.291104,0.33589 -0.18474,0.13435 -0.442256,0.20153 -0.251917,0.0616 -0.554219,0.0616 z m 0.649388,-2.15529 h 0.431059 q 0.386273,0 0.54862,-0.13436 0.167946,-0.13435 0.167946,-0.39187 0,-0.25192 -0.173544,-0.35269 -0.173543,-0.10636 -0.531826,-0.10636 h -0.442255 z m 0,1.63466 h 0.515031 q 0.403069,0 0.610201,-0.13995 0.21273,-0.14555 0.21273,-0.45905 0,-0.29111 -0.207132,-0.41427 -0.201534,-0.12875 -0.615799,-0.12875 h -0.515031 z"
+                            style="text-align:center;text-anchor:middle"
+                            id="path32481" />
+                        </g>
+                    </g>
+                    <g
+                        id="c" onclick="rotarySubmitLetters(this.id);">
+                        <circle
+                        style="fill:#ffffff;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                        id="circle5780"
+                        cx="88.472054"
+                        cy="-93.084213"
+                        r="4.4311285"
+                        transform="rotate(67.5)" />
+                        <g
+                        aria-label="C"
+                        transform="rotate(67.5)"
+                        id="text5784"
+                        style="font-weight:600;font-size:5.59817px;line-height:1.75;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Semi-Bold';stroke-width:0.264583">
+                        <path
+                            d="m 88.712774,-91.186438 q -0.341488,0 -0.643789,-0.12316 -0.296703,-0.12316 -0.52063,-0.363881 -0.223927,-0.240721 -0.352685,-0.593406 -0.128757,-0.352685 -0.128757,-0.806137 0,-0.447853 0.128757,-0.800538 0.128758,-0.358283 0.352685,-0.604602 0.229525,-0.24632 0.537424,-0.375078 0.3079,-0.128757 0.671781,-0.128757 0.341488,0 0.604602,0.139954 0.268712,0.139954 0.442256,0.319096 l -0.358283,0.403068 q -0.139955,-0.134356 -0.3079,-0.212731 -0.167945,-0.08397 -0.380675,-0.08397 -0.229525,0 -0.419863,0.09517 -0.184739,0.08957 -0.319096,0.263114 -0.134356,0.167945 -0.21273,0.414264 -0.07278,0.24632 -0.07278,0.554219 0,0.313497 0.07278,0.565415 0.07837,0.24632 0.21273,0.419863 0.134357,0.167945 0.324694,0.263114 0.195936,0.08957 0.431059,0.08957 0.223927,0 0.403069,-0.09517 0.184739,-0.09517 0.341488,-0.268712 l 0.358283,0.39747 q -0.218329,0.257515 -0.509434,0.39747 -0.285506,0.134356 -0.654986,0.134356 z"
+                            style="text-align:center;text-anchor:middle"
+                            id="path32629" />
+                        </g>
+                    </g>
+                    <g
+                        id="d" onclick="rotarySubmitLetters(this.id);">
+                        <circle
+                        style="fill:#ffffff;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                        id="circle5788"
+                        cx="93.925606"
+                        cy="-75.119614"
+                        r="4.4311285"
+                        transform="rotate(56.250001)" />
+                        <g
+                        aria-label="D"
+                        transform="rotate(56.250001)"
+                        id="text5792"
+                        style="font-weight:600;font-size:5.59817px;line-height:1.75;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Semi-Bold';stroke-width:0.264583">
+                        <path
+                            d="m 92.582047,-73.289017 v -3.661203 h 0.962886 q 0.811734,0 1.265186,0.453452 0.45905,0.453452 0.45905,1.360355 0,0.453452 -0.117562,0.800539 -0.117561,0.347086 -0.33589,0.582209 -0.218329,0.229525 -0.531826,0.347087 -0.313498,0.117561 -0.705369,0.117561 z m 0.649388,-0.526228 h 0.27431 q 0.526228,0 0.811735,-0.319095 0.285507,-0.324694 0.285507,-1.002073 0,-0.67178 -0.285507,-0.979679 -0.285507,-0.3079 -0.811735,-0.3079 h -0.27431 z"
+                            style="text-align:center;text-anchor:middle"
+                            id="path32658" />
+                        </g>
+                    </g>
+                    <g
+                        id="e" onclick="rotarySubmitLetters(this.id);">
+                        <circle
+                        style="fill:#ffffff;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                        id="circle5796"
+                        cx="95.769646"
+                        cy="-56.436264"
+                        r="4.4311285"
+                        transform="rotate(45)" />
+                        <g
+                        aria-label="E"
+                        transform="rotate(45)"
+                        id="text5800"
+                        style="font-weight:600;font-size:5.59817px;line-height:1.75;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Semi-Bold';stroke-width:0.264583">
+                        <path
+                            d="m 94.568841,-54.605663 v -3.661203 h 2.345634 v 0.54862 h -1.696246 v 0.934895 h 1.43873 v 0.54862 h -1.43873 v 1.080447 h 1.752227 v 0.548621 z"
+                            style="text-align:center;text-anchor:middle"
+                            id="path32687" />
+                        </g>
+                    </g>
+                    <g
+                        id="f" onclick="rotarySubmitLetters(this.id);">
+                        <circle
+                        style="fill:#ffffff;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                        id="circle5804"
+                        cx="93.933319"
+                        cy="-37.752151"
+                        r="4.4311285"
+                        transform="rotate(33.749999)" />
+                        <g
+                        aria-label="F"
+                        transform="rotate(33.749999)"
+                        id="text5808"
+                        style="font-weight:600;font-size:5.59817px;line-height:1.75;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Semi-Bold';stroke-width:0.264583">
+                        <path
+                            d="m 92.763301,-35.921551 v -3.661203 h 2.340035 v 0.548621 h -1.690647 v 1.035661 h 1.438729 v 0.548621 h -1.438729 v 1.5283 z"
+                            style="text-align:center;text-anchor:middle"
+                            id="path32716" />
+                        </g>
+                    </g>
+                    <g
+                        id="g" onclick="rotarySubmitLetters(this.id);">
+                        <circle
+                        style="fill:#ffffff;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                        id="circle5812"
+                        cx="88.487175"
+                        cy="-19.785301"
+                        r="4.4311285"
+                        transform="rotate(22.5)" />
+                        <g
+                        aria-label="G"
+                        transform="rotate(22.5)"
+                        id="text5816"
+                        style="font-weight:600;font-size:5.59817px;line-height:1.75;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Semi-Bold';stroke-width:0.264583">
+                        <path
+                            d="m 88.744691,-17.887521 q -0.347087,0 -0.649388,-0.123159 -0.296703,-0.12316 -0.515032,-0.363881 -0.218328,-0.240722 -0.347086,-0.593406 -0.12316,-0.352685 -0.12316,-0.806137 0,-0.453452 0.12316,-0.806136 0.128758,-0.352685 0.347086,-0.599004 0.223927,-0.24632 0.526228,-0.375078 0.3079,-0.128758 0.666182,-0.128758 0.363882,0 0.615799,0.145553 0.257516,0.139954 0.419863,0.313497 l -0.358283,0.403068 q -0.128758,-0.128757 -0.285507,-0.21273 -0.15115,-0.08397 -0.391872,-0.08397 -0.218328,0 -0.403068,0.09517 -0.179141,0.08957 -0.313497,0.263114 -0.128758,0.167945 -0.201534,0.414265 -0.07278,0.246319 -0.07278,0.554219 0,0.626995 0.251918,0.985278 0.257516,0.352684 0.750155,0.352684 0.145552,0 0.279908,-0.03919 0.134356,-0.04479 0.212731,-0.12316 v -0.789342 h -0.632593 v -0.531826 h 1.220401 v 1.612273 q -0.179142,0.179142 -0.475845,0.3079 -0.291105,0.128757 -0.643789,0.128757 z"
+                            style="text-align:center;text-anchor:middle"
+                            id="path32745" />
+                        </g>
+                    </g>
+                    <g
+                        id="h" onclick="rotarySubmitLetters(this.id);">
+                        <circle
+                        style="fill:#ffffff;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                        id="circle5820"
+                        cx="79.640526"
+                        cy="-3.2261672"
+                        r="4.4311285"
+                        transform="rotate(11.249999)" />
+                        <g
+                        aria-label="H"
+                        transform="rotate(11.249999)"
+                        id="text5824"
+                        style="font-weight:600;font-size:5.59817px;line-height:1.75;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Semi-Bold';stroke-width:0.264583">
+                        <path
+                            d="m 78.364147,-1.3955647 v -3.661203 h 0.649388 v 1.4723186 h 1.25399 v -1.4723186 h 0.649388 v 3.661203 h -0.649388 v -1.6234692 h -1.25399 v 1.6234692 z"
+                            style="text-align:center;text-anchor:middle"
+                            id="path32774" />
+                        </g>
+                    </g>
+                    <g
+                        id="i" onclick="rotarySubmitLetters(this.id);">
+                        <circle
+                        style="fill:#ffffff;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                        id="circle5828"
+                        cx="67.733337"
+                        cy="11.288889"
+                        r="4.4311285" />
+                        <g
+                        aria-label="I"
+                        id="text5832"
+                        style="font-weight:600;font-size:5.59817px;line-height:1.75;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Semi-Bold';stroke-width:0.264583">
+                        <path
+                            d="M 66.524129,13.119492 V 12.570871 H 67.40864 V 10.006909 H 66.524129 V 9.4582885 h 2.41841 v 0.5486205 h -0.884511 v 2.563962 h 0.884511 v 0.548621 z"
+                            style="text-align:center;text-anchor:middle"
+                            id="path32922" />
+                        </g>
+                    </g>
+                    <g
+                        id="j" onclick="rotarySubmitLetters(this.id);">
+                        <circle
+                        style="fill:#ffffff;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                        id="circle5836"
+                        cx="53.223194"
+                        cy="23.202068"
+                        r="4.4311285"
+                        transform="rotate(-11.249999)" />
+                        <g
+                        aria-label="J"
+                        transform="rotate(-11.249999)"
+                        id="text5840"
+                        style="font-weight:600;font-size:5.59817px;line-height:1.75;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Semi-Bold';stroke-width:0.264583">
+                        <path
+                            d="m 53.147619,25.066261 q -0.151151,0 -0.307899,-0.03359 -0.156749,-0.03359 -0.3079,-0.106366 -0.15115,-0.07278 -0.285506,-0.184739 -0.134356,-0.117562 -0.240722,-0.279909 l 0.380676,-0.403068 q 0.162347,0.223927 0.352685,0.33589 0.195936,0.106365 0.391871,0.106365 0.335891,0 0.498238,-0.173543 0.162346,-0.173543 0.162346,-0.593406 V 21.880902 H 52.307893 V 21.33788 h 2.132903 v 2.451998 q 0,0.263114 -0.06718,0.498237 -0.06718,0.229525 -0.218328,0.403068 -0.151151,0.173543 -0.403069,0.274311 -0.246319,0.100767 -0.604602,0.100767 z"
+                            style="text-align:center;text-anchor:middle"
+                            id="path33070" />
+                        </g>
+                    </g>
+                    <g
+                        id="k" onclick="rotarySubmitLetters(this.id);">
+                        <circle
+                        style="fill:#ffffff;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                        id="circle5844"
+                        cx="36.667709"
+                        cy="32.05555"
+                        r="4.4311285"
+                        transform="rotate(-22.5)" />
+                        <g
+                        aria-label="K"
+                        transform="rotate(-22.5)"
+                        id="text5848"
+                        style="font-weight:600;font-size:5.59817px;line-height:1.75;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Semi-Bold';stroke-width:0.264583">
+                        <path
+                            d="m 35.254171,33.88615 v -3.661203 h 0.660584 v 1.662657 h 0.01679 l 1.304374,-1.662657 h 0.727762 l -1.13083,1.421935 1.248391,2.239268 h -0.722163 l -0.923699,-1.74103 -0.520629,0.660584 v 1.080446 z"
+                            style="text-align:center;text-anchor:middle"
+                            id="path33218" />
+                        </g>
+                    </g>
+                    <g
+                        id="l" onclick="rotarySubmitLetters(this.id);">
+                        <circle
+                        style="fill:#ffffff;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                        id="circle5852"
+                        cx="18.703112"
+                        cy="37.509098"
+                        r="4.4311285"
+                        transform="rotate(-33.749999)" />
+                        <g
+                        aria-label="L"
+                        transform="rotate(-33.749999)"
+                        id="text5856"
+                        style="font-weight:600;font-size:5.59817px;line-height:1.75;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Semi-Bold';stroke-width:0.264583">
+                        <path
+                            d="M 17.521898,39.339703 V 35.6785 h 0.643789 v 3.112582 h 1.718638 v 0.548621 z"
+                            style="text-align:center;text-anchor:middle"
+                            id="path33411" />
+                        </g>
+                    </g>
+                    <g
+                        id="m" onclick="rotarySubmitLetters(this.id);">
+                        <circle
+                        style="fill:#ffffff;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                        id="circle5860"
+                        cx="0.01976018"
+                        cy="39.353142"
+                        r="4.4311285"
+                        transform="rotate(-45)" />
+                        <g
+                        aria-label="M"
+                        transform="rotate(-45)"
+                        id="text5864"
+                        style="font-weight:600;font-size:5.59817px;line-height:1.75;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Semi-Bold';stroke-width:0.264583">
+                        <path
+                            d="m -1.2958102,41.183743 v -3.661204 h 0.71656577 l 0.43665724,1.427534 0.15115059,0.54862 h 0.02239267 l 0.14555242,-0.54862 0.44225541,-1.427534 h 0.7165657 v 3.661204 H 0.76431632 v -1.477917 q 0,-0.145553 0.0111963,-0.347087 0.0111963,-0.201534 0.0223927,-0.414264 0.0167945,-0.212731 0.033589,-0.408667 0.0167945,-0.195936 0.0279909,-0.330292 H 0.8426907 L 0.59637122,39.056438 0.193303,40.215259 h -0.36947921 l -0.39747005,-1.158821 -0.24072131,-0.850922 h -0.0167945 q 0.0167945,0.134356 0.033589,0.330292 0.0167945,0.195936 0.0279908,0.408667 0.0167945,0.21273 0.0223927,0.414264 0.0111963,0.201534 0.0111963,0.347087 v 1.477917 z"
+                            style="text-align:center;text-anchor:middle"
+                            id="path33432" />
+                        </g>
+                    </g>
+                    <g
+                        id="n" onclick="rotarySubmitLetters(this.id);">
+                        <circle
+                        style="fill:#ffffff;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                        id="circle5868"
+                        cx="-18.664351"
+                        cy="37.516808"
+                        r="4.4311285"
+                        transform="rotate(-56.250001)" />
+                        <g
+                        aria-label="N"
+                        transform="rotate(-56.250001)"
+                        id="text5872"
+                        style="font-weight:600;font-size:5.59817px;line-height:1.75;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Semi-Bold';stroke-width:0.264583">
+                        <path
+                            d="m -19.929542,39.347408 v -3.661203 h 0.682977 l 0.968483,2.054529 0.330292,0.783743 h 0.01679 q -0.02239,-0.285506 -0.05598,-0.6102 -0.03359,-0.330292 -0.03359,-0.638192 v -1.58988 h 0.621397 v 3.661203 h -0.682977 l -0.968483,-2.060126 -0.330293,-0.778146 h -0.01679 q 0.02239,0.296703 0.05598,0.615799 0.03359,0.313497 0.03359,0.621397 v 1.601076 z"
+                            style="text-align:center;text-anchor:middle"
+                            id="path33453" />
+                        </g>
+                    </g>
+                    <g
+                        id="o" onclick="rotarySubmitLetters(this.id);">
+                        <circle
+                        style="fill:#ffffff;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                        id="circle5876"
+                        cx="-36.631195"
+                        cy="32.070671"
+                        r="4.4311285"
+                        transform="rotate(-67.5)" />
+                        <g
+                        aria-label="O"
+                        transform="rotate(-67.5)"
+                        id="text5880"
+                        style="font-weight:600;font-size:5.59817px;line-height:1.75;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Semi-Bold';stroke-width:0.264583">
+                        <path
+                            d="m -36.631191,33.968454 q -0.319095,0 -0.587808,-0.12316 -0.263114,-0.128758 -0.453451,-0.369479 -0.18474,-0.24632 -0.291105,-0.604603 -0.106365,-0.358282 -0.106365,-0.817332 0,-0.453452 0.106365,-0.800539 0.106365,-0.352684 0.291105,-0.587808 0.190337,-0.240721 0.453451,-0.363881 0.268713,-0.128757 0.587808,-0.128757 0.319096,0 0.58221,0.128757 0.268712,0.12316 0.453452,0.363881 0.190337,0.235124 0.296703,0.587808 0.106365,0.347087 0.106365,0.800539 0,0.45905 -0.106365,0.817332 -0.106366,0.358283 -0.296703,0.604603 -0.18474,0.240721 -0.453452,0.369479 -0.263114,0.12316 -0.58221,0.12316 z m 0,-0.565415 q 0.352685,0 0.559817,-0.347087 0.212731,-0.352685 0.212731,-1.002072 0,-0.632594 -0.212731,-0.974082 -0.207132,-0.341488 -0.559817,-0.341488 -0.352684,0 -0.565415,0.341488 -0.207132,0.341488 -0.207132,0.974082 0,0.649387 0.207132,1.002072 0.212731,0.347087 0.565415,0.347087 z"
+                            style="text-align:center;text-anchor:middle"
+                            id="path33474" />
+                        </g>
+                    </g>
+                    <g
+                        id="p" onclick="rotarySubmitLetters(this.id);">
+                        <circle
+                        style="fill:#ffffff;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                        id="circle5884"
+                        cx="-53.190338"
+                        cy="23.224022"
+                        r="4.4311285"
+                        transform="rotate(-78.750001)" />
+                        <g
+                        aria-label="P"
+                        transform="rotate(-78.750001)"
+                        id="text5888"
+                        style="font-weight:600;font-size:5.59817px;line-height:1.75;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Semi-Bold';stroke-width:0.264583">
+                        <path
+                            d="m -54.489107,25.054621 v -3.661203 h 1.203606 q 0.302301,0 0.554219,0.05598 0.257516,0.05598 0.442256,0.190338 0.184739,0.134356 0.291104,0.352685 0.106366,0.21273 0.106366,0.531826 0,0.302301 -0.106366,0.526228 -0.106365,0.223927 -0.296703,0.375077 -0.184739,0.145553 -0.442255,0.218329 -0.251918,0.06718 -0.548621,0.06718 h -0.554219 v 1.343561 z m 0.649387,-1.864191 h 0.503836 q 0.806136,0 0.806136,-0.666182 0,-0.347087 -0.201534,-0.475844 -0.201534,-0.134357 -0.604602,-0.134357 h -0.503836 z"
+                            style="text-align:center;text-anchor:middle"
+                            id="path33495" />
+                        </g>
+                    </g>
+                    <g
+                        id="q" onclick="rotarySubmitLetters(this.id);">
+                        <circle
+                        style="fill:#ffffff;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                        id="circle5892"
+                        cx="-67.705399"
+                        cy="11.316833"
+                        r="4.4311285"
+                        transform="rotate(-90)" />
+                        <g
+                        aria-label="Q"
+                        transform="rotate(-90)"
+                        id="text5896"
+                        style="font-weight:600;font-size:5.59817px;line-height:1.75;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Semi-Bold';stroke-width:0.264583">
+                        <path
+                            d="m -67.741787,12.24053 q 0.352685,0 0.559817,-0.352685 0.207133,-0.352684 0.207133,-1.030063 0,-0.632593 -0.207133,-0.9740813 -0.207132,-0.3470865 -0.559817,-0.3470865 -0.352684,0 -0.559816,0.3470865 -0.207133,0.3414883 -0.207133,0.9740813 0,0.677379 0.207133,1.030063 0.207132,0.352685 0.559816,0.352685 z m 1.030064,1.416337 q -0.515032,0 -0.845324,-0.257516 -0.330292,-0.257515 -0.492639,-0.660584 -0.509433,-0.111963 -0.817333,-0.593406 -0.307899,-0.481442 -0.307899,-1.287579 0,-0.453452 0.100767,-0.800538 0.106365,-0.3526848 0.296703,-0.5878079 0.190338,-0.2407213 0.453452,-0.363881 0.263114,-0.1287579 0.582209,-0.1287579 0.319096,0 0.58221,0.1287579 0.263114,0.1231597 0.453452,0.363881 0.190338,0.2351231 0.291105,0.5878079 0.106365,0.347086 0.106365,0.800538 0,0.783744 -0.285507,1.259588 -0.285506,0.475845 -0.772547,0.604603 0.09517,0.218328 0.291105,0.313497 0.201534,0.09517 0.442255,0.09517 0.08397,0 0.156749,-0.02239 0.07278,-0.01679 0.12316,-0.04478 l 0.117561,0.498237 q -0.08957,0.04479 -0.21273,0.06718 -0.117562,0.02799 -0.263114,0.02799 z"
+                            style="text-align:center;text-anchor:middle"
+                            id="path33516" />
+                        </g>
+                    </g>
+                    <g
+                        id="r" onclick="rotarySubmitLetters(this.id);">
+                        <circle
+                        style="fill:#ffffff;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                        id="circle5900"
+                        cx="-79.618576"
+                        cy="-3.1933146"
+                        r="4.4311285"
+                        transform="rotate(-101.25)" />
+                        <g
+                        aria-label="R"
+                        transform="rotate(-101.25)"
+                        id="text5904"
+                        style="font-weight:600;font-size:5.59817px;line-height:1.75;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Semi-Bold';stroke-width:0.264583">
+                        <path
+                            d="m -80.97613,-1.362712 v -3.6612031 h 1.220401 q 0.285507,0 0.531826,0.055982 0.24632,0.055982 0.425461,0.1847396 0.18474,0.1231598 0.285507,0.330292 0.106365,0.2071323 0.106365,0.5150317 0,0.4198627 -0.201534,0.6773785 -0.195936,0.2575158 -0.526228,0.3694792 l 0.873314,1.5283004 h -0.73336 l -0.783744,-1.4331315 h -0.54862 v 1.4331315 z m 0.649388,-1.9481631 h 0.503835 q 0.380675,0 0.576611,-0.1567488 0.201535,-0.1567487 0.201535,-0.4702462 0,-0.3190957 -0.201535,-0.4422554 -0.195936,-0.1231598 -0.576611,-0.1231598 h -0.503835 z"
+                            style="text-align:center;text-anchor:middle"
+                            id="path33537" />
+                        </g>
+                    </g>
+                    <g
+                        id="s" onclick="rotarySubmitLetters(this.id);">
+                        <circle
+                        style="fill:#ffffff;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                        id="circle5908"
+                        cx="-88.472046"
+                        cy="-19.748791"
+                        r="4.4311285"
+                        transform="rotate(-112.5)" />
+                        <g
+                        aria-label="S"
+                        transform="rotate(-112.5)"
+                        id="text5912"
+                        style="font-weight:600;font-size:5.59817px;line-height:1.75;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Semi-Bold';stroke-width:0.264583">
+                        <path
+                            d="m -88.466445,-17.85101 q -0.386274,0 -0.738959,-0.139954 -0.352684,-0.139955 -0.626995,-0.39747 l 0.380676,-0.442256 q 0.207132,0.18474 0.470246,0.302301 0.263114,0.111964 0.554219,0.111964 0.319096,0 0.487041,-0.12316 0.167945,-0.12316 0.167945,-0.319096 0,-0.123159 -0.04479,-0.201534 -0.04478,-0.08397 -0.128757,-0.145552 -0.07838,-0.06158 -0.195936,-0.111964 -0.111964,-0.05038 -0.24632,-0.106365 l -0.498237,-0.218328 q -0.145552,-0.05598 -0.285507,-0.139955 -0.139954,-0.08397 -0.251917,-0.201534 -0.111964,-0.117561 -0.179142,-0.27431 -0.06718,-0.156749 -0.06718,-0.358283 0,-0.218329 0.09517,-0.403068 0.09517,-0.190338 0.263114,-0.330292 0.167945,-0.139954 0.39747,-0.218329 0.235123,-0.07837 0.515032,-0.07837 0.33589,0 0.638191,0.128758 0.307899,0.123159 0.537424,0.33589 l -0.33589,0.414264 q -0.184739,-0.145552 -0.391872,-0.229524 -0.201534,-0.08397 -0.481442,-0.08397 -0.263114,0 -0.425461,0.111963 -0.156749,0.111964 -0.156749,0.319096 0,0.106365 0.05038,0.18474 0.05038,0.07278 0.134356,0.134356 0.08957,0.05598 0.201534,0.100767 0.117561,0.04479 0.240721,0.09517 l 0.481443,0.207132 q 0.173543,0.06718 0.319095,0.156749 0.145553,0.08957 0.251918,0.207132 0.106365,0.117562 0.162347,0.27431 0.06158,0.151151 0.06158,0.352685 0,0.223927 -0.09517,0.419863 -0.08957,0.195936 -0.263114,0.347086 -0.173543,0.145553 -0.425461,0.235123 -0.251918,0.08397 -0.571013,0.08397 z"
+                            style="text-align:center;text-anchor:middle"
+                            id="path33558" />
+                        </g>
+                    </g>
+                    <g
+                        id="t" onclick="rotarySubmitLetters(this.id);">
+                        <circle
+                        style="fill:#ffffff;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                        id="circle5916"
+                        cx="-93.925606"
+                        cy="-37.713398"
+                        r="4.4311285"
+                        transform="rotate(-123.75)" />
+                        <g
+                        aria-label="T"
+                        transform="rotate(-123.75)"
+                        id="text5920"
+                        style="font-weight:600;font-size:5.59817px;line-height:1.75;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Semi-Bold';stroke-width:0.264583">
+                        <path
+                            d="m -94.250295,-35.882793 v -3.112583 h -1.153223 v -0.54862 h 2.955833 v 0.54862 h -1.153223 v 3.112583 z"
+                            style="text-align:center;text-anchor:middle"
+                            id="path33579" />
+                        </g>
+                    </g>
+                    <g
+                        id="u" onclick="rotarySubmitLetters(this.id);">
+                        <circle
+                        style="fill:#ffffff;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                        id="circle5924"
+                        cx="-95.769646"
+                        cy="-56.396748"
+                        r="4.4311285"
+                        transform="rotate(-135)" />
+                        <g
+                        aria-label="U"
+                        transform="rotate(-135)"
+                        id="text5928"
+                        style="font-weight:600;font-size:5.59817px;line-height:1.75;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Semi-Bold';stroke-width:0.264583">
+                        <path
+                            d="m -95.764043,-54.532557 q -0.599004,0 -0.940493,-0.358283 -0.341488,-0.358283 -0.341488,-1.108438 v -2.26166 h 0.649388 v 2.312044 q 0,0.453452 0.167945,0.654986 0.167945,0.195936 0.464648,0.195936 0.302301,0 0.475844,-0.195936 0.173543,-0.201534 0.173543,-0.654986 v -2.312044 h 0.621397 v 2.26166 q 0,0.755753 -0.330292,1.114036 -0.330292,0.352685 -0.940492,0.352685 z"
+                            style="text-align:center;text-anchor:middle"
+                            id="path33600" />
+                        </g>
+                    </g>
+                    <g
+                        id="v" onclick="rotarySubmitLetters(this.id);">
+                        <circle
+                        style="fill:#ffffff;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                        id="circle5932"
+                        cx="-93.933311"
+                        cy="-75.080856"
+                        r="4.4311285"
+                        transform="rotate(-146.25)" />
+                        <g
+                        aria-label="V"
+                        transform="rotate(-146.25)"
+                        id="text5936"
+                        style="font-weight:600;font-size:5.59817px;line-height:1.75;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Semi-Bold';stroke-width:0.264583">
+                        <path
+                            d="m -94.31399,-73.250252 -1.142027,-3.661203 h 0.688575 l 0.515032,1.841798 q 0.08957,0.313498 0.156748,0.593406 0.07278,0.279909 0.167945,0.599004 h 0.02239 q 0.09517,-0.319095 0.162347,-0.599004 0.07278,-0.279908 0.156749,-0.593406 l 0.509433,-1.841798 h 0.666182 l -1.136428,3.661203 z"
+                            style="text-align:center;text-anchor:middle"
+                            id="path33621" />
+                        </g>
+                    </g>
+                    <g
+                        id="w" onclick="rotarySubmitLetters(this.id);">
+                        <circle
+                        style="fill:#ffffff;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                        id="circle5940"
+                        cx="-88.487175"
+                        cy="-93.047707"
+                        r="4.4311285"
+                        transform="rotate(-157.5)" />
+                        <g
+                        aria-label="W"
+                        transform="rotate(-157.5)"
+                        id="text5944"
+                        style="font-weight:600;font-size:5.59817px;line-height:1.75;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Semi-Bold';stroke-width:0.264583">
+                        <path
+                            d="m -89.606812,-91.21711 -0.52063,-3.661203 h 0.694173 l 0.18474,2.121707 q 0.01679,0.229525 0.02799,0.425461 0.0112,0.195935 0.02239,0.453451 h 0.01679 q 0.04479,-0.257516 0.08397,-0.453451 0.04479,-0.195936 0.09517,-0.425461 l 0.302301,-1.186812 h 0.487041 l 0.285507,1.186812 q 0.05598,0.229525 0.09517,0.425461 0.03919,0.190337 0.08397,0.453451 h 0.02239 q 0.0112,-0.263114 0.01679,-0.453451 0.0112,-0.195936 0.02799,-0.425461 l 0.179142,-2.121707 h 0.654985 l -0.492639,3.661203 h -0.73336 l -0.285506,-1.298775 q -0.03919,-0.173543 -0.07278,-0.341488 -0.02799,-0.173544 -0.04479,-0.341489 h -0.0168 q -0.02799,0.167945 -0.05038,0.341489 -0.02239,0.167945 -0.06158,0.341488 l -0.279908,1.298775 z"
+                            style="text-align:center;text-anchor:middle"
+                            id="path33642" />
+                        </g>
+                    </g>
+                    <g
+                        id="x" onclick="rotarySubmitLetters(this.id);">
+                        <circle
+                        style="fill:#ffffff;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                        id="circle5948"
+                        cx="-79.640526"
+                        cy="-109.60685"
+                        r="4.4311285"
+                        transform="rotate(-168.75)" />
+                        <g
+                        aria-label="X"
+                        transform="rotate(-168.75)"
+                        id="text5952"
+                        style="font-weight:600;font-size:5.59817px;line-height:1.75;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Semi-Bold';stroke-width:0.264583">
+                        <path
+                            d="m -81.118446,-107.77626 1.074849,-1.88658 -1.007671,-1.77462 h 0.722164 l 0.431059,0.81173 q 0.06718,0.12876 0.134356,0.26312 0.06718,0.13435 0.151151,0.2967 h 0.02239 q 0.07278,-0.16235 0.134356,-0.2967 0.06158,-0.13436 0.12316,-0.26312 l 0.414265,-0.81173 h 0.688575 l -1.007671,1.80261 1.074849,1.85859 h -0.716566 l -0.475845,-0.86212 q -0.07837,-0.14555 -0.15115,-0.28551 -0.07278,-0.14555 -0.156749,-0.31349 h -0.02239 q -0.07837,0.16794 -0.145552,0.31349 -0.06718,0.13996 -0.139954,0.28551 l -0.45905,0.86212 z"
+                            style="text-align:center;text-anchor:middle"
+                            id="path33663" />
+                        </g>
+                    </g>
+                    <g
+                        id="y" onclick="rotarySubmitLetters(this.id);">
+                        <circle
+                        style="fill:#ffffff;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                        id="circle5956"
+                        cx="-67.733337"
+                        cy="-124.12189"
+                        r="4.4311285"
+                        transform="scale(-1)" />
+                        <g
+                        aria-label="Y"
+                        transform="scale(-1)"
+                        id="text5960"
+                        style="font-weight:600;font-size:5.59817px;line-height:1.75;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Semi-Bold';stroke-width:0.264583">
+                        <path
+                            d="m -68.058035,-122.2913 v -1.27078 l -1.203606,-2.39042 h 0.688575 l 0.45905,0.98528 q 0.09517,0.21273 0.184739,0.41986 0.09517,0.20153 0.190338,0.42546 h 0.02239 q 0.100767,-0.22393 0.195936,-0.43106 0.09517,-0.20713 0.190337,-0.41986 l 0.453452,-0.97968 h 0.671781 l -1.203607,2.39042 v 1.27078 z"
+                            style="text-align:center;text-anchor:middle"
+                            id="path33684" />
+                        </g>
+                    </g>
+                    <g
+                        id="z" onclick="rotarySubmitLetters(this.id);">
+                        <circle
+                        style="fill:#ffffff;stroke:none;stroke-width:1.19063;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;stop-color:#000000"
+                        id="circle5964"
+                        cx="-53.22319"
+                        cy="-136.03508"
+                        r="4.4311285"
+                        transform="rotate(168.75)" />
+                        <g
+                        aria-label="Z"
+                        transform="rotate(168.75)"
+                        id="text5968"
+                        style="font-weight:600;font-size:5.59817px;line-height:1.75;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Semi-Bold';stroke-width:0.264583">
+                        <path
+                            d="m -54.572352,-134.20448 v -0.39187 l 1.875386,-2.72631 h -1.707441 v -0.54303 h 2.50798 v 0.39188 l -1.880985,2.72071 h 1.903377 v 0.54862 z"
+                            style="text-align:center;text-anchor:middle"
+                            id="path33705" />
+                        </g>
+                    </g>
+                    </g>
+                    <path
+                    style="fill:#b3b3b3;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                    d="m 107.9225,87.700425 2.44084,-0.381381 8.31411,3.966366 5.72072,0.07627 5.87327,-2.745944 3.89009,1.296697 -3.81381,9.153152 -14.56877,-5.110509 -7.3988,-4.11892 z"
+                    id="path4403" />
+                </g>
+                </svg>
+            </div>
+            <div class="randomLetter" id="randomLetter">
+                <h2 style="font-size: 2vw; font-family: 'Source Code Pro', 'Courier New', Courier, monospace; color: #ffffff; text-align: center;">"Randomiser"</h2>
+                <p style="font-size: 1.5vw; font-family: 'Source Code Pro', 'Courier New', Courier, monospace; color: #ffffff; text-align: center;">Letter: <span data-letter="" class="randomLetterOutput" id="randomLetterOutput"></span></p>
+                <button onclick="pickRandomLetter();" style="cursor: pointer; padding: 1vw 1vw; background-color: #000014; color: #ffffff; border: solid #ffffff; border-radius: 1vw; font-size: 1.5vw; display: block; margin-left: auto; margin-right: auto;" id="randomiseLetterButton">Pick Letter</button>
+                <br style="font-size: 1.5vw;">
+                <button onclick="submitRandomLetter();" style="cursor: pointer; padding: 1vw 1vw; background-color: #000014; color: #ffffff; border: solid #ffffff; border-radius: 1vw; font-size: 1.5vw; display: block; margin-left: auto; margin-right: auto;" id="randomSubmitLetterButton">Submit Letter</button>
+            </div>
+            <div class="binaryInput" id="binaryInput">
+                <h2 style="font-size: 2vw; font-family: 'Source Code Pro', 'Courier New', Courier, monospace; color: #ffffff; text-align: center;">"00111010&#8203;00101001"</h2>
+                <div style="display: block; margin-left: auto; margin-right: auto; width: 48vw;" class="binaryInputSelection" id="binaryInputSelection">
+                    <select style="font-size: 1.5vw; width: 6vw;" name="bin128" id="bin128">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select> 
+                    <select style="font-size: 1.5vw; width: 5vw;" name="bin64" id="bin64">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select> 
+                    <select style="font-size: 1.5vw; width: 5vw;" name="bin32" id="bin32">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                    </select> 
+                    <select style="font-size: 1.5vw; width: 5vw;" name="bin16" id="bin16">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select> 
+                    <select style="font-size: 1.5vw; width: 5vw;" name="bin8" id="bin8">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                    </select> 
+                    <select style="font-size: 1.5vw; width: 5vw;" name="bin4" id="bin4">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select> 
+                    <select style="font-size: 1.5vw; width: 5vw;" name="bin2" id="bin2">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                    </select> 
+                    <select style="font-size: 1.5vw; width: 5vw;" name="bin1" id="bin1">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                    <br style="font-size: 1.5vw;">
+                    <br style="font-size: 1.5vw;">
+                    <button onclick="convertFromBinary();" style="cursor: pointer; padding: 1vw 1vw; background-color: #000014; color: #ffffff; border: solid #ffffff; border-radius: 1vw; font-size: 1.5vw; display: block; margin-left: auto; margin-right: auto;" id="binarySubmitLetterButton">Submit Letter</button>
+                    <p style="font-size: 1.5vw; font-family: 'Source Code Pro', 'Courier New', Courier, monospace; color: #ff6666; text-align: center;" id="randomErrorMessage"></p>
+                    <details style="font-size: 1.5vw; font-family: 'Source Code Pro', 'Courier New', Courier, monospace; color: #ffffff; text-align: center;">
+                        <summary>Help...</summary>
+
+                        <table class="binaryGuide">
+                            <tr>
+                                <td>a</td>
+                                <td>b</td>
+                                <td>c</td>
+                                <td>d</td>
+                                <td>e</td>
+                                <td>f</td>
+                                <td>g</td>
+                                <td>h</td>
+                                <td>i</td>
+                                <td>j</td>
+                                <td>k</td>
+                                <td>l</td>
+                                <td>m</td>
+                            </tr>
+                            <tr>
+                                <td>97</td>
+                                <td>98</td>
+                                <td>99</td>
+                                <td>100</td>
+                                <td>101</td>
+                                <td>102</td>
+                                <td>103</td>
+                                <td>104</td>
+                                <td>105</td>
+                                <td>106</td>
+                                <td>107</td>
+                                <td>108</td>
+                                <td>109</td>
+                            </tr>
+                            <tr>
+                                <td>n</td>
+                                <td>o</td>
+                                <td>p</td>
+                                <td>q</td>
+                                <td>r</td>
+                                <td>s</td>
+                                <td>t</td>
+                                <td>u</td>
+                                <td>v</td>
+                                <td>w</td>
+                                <td>x</td>
+                                <td>y</td>
+                                <td>z</td>
+                            </tr>
+                            <tr>
+                                <td>110</td>
+                                <td>111</td>
+                                <td>112</td>
+                                <td>113</td>
+                                <td>114</td>
+                                <td>115</td>
+                                <td>116</td>
+                                <td>117</td>
+                                <td>118</td>
+                                <td>119</td>
+                                <td>120</td>
+                                <td>121</td>
+                                <td>122</td>
+                            </tr>
+                          </table> 
+                    </details>
+                </div>
+            </div>
+            <div class="passwordKeyboard" id="passwordKeyboard">
+                <h2 style="font-size: 2vw; font-family: 'Source Code Pro', 'Courier New', Courier, monospace; color: #ffffff; text-align: center;">"Password Requirements"</h2>
+                <div id="keyboardContainer">
+                    <div class="keyboardGrid" id="keyboardGrid" style="display: grid; grid-template-columns: 3.5vw 3.5vw 3.5vw 3.5vw 3.5vw 3.5vw 3.5vw 3.5vw 3.5vw 3.5vw; margin-left: auto; margin-right: auto; width: 30vw;">
+                    <div class="keyboardGridItem">
+                        <button onclick="typeLetter(this.id);" id="q" class="keyboardGridButton">q</button>
+                    </div>
+                    <div class="keyboardGridItem">
+                        <button onclick="typeLetter(this.id);" id="w" class="keyboardGridButton">w</button>
+                    </div>
+                    <div class="keyboardGridItem">
+                        <button onclick="typeLetter(this.id);" id="e" class="keyboardGridButton">e</button>
+                    </div>
+                    <div class="keyboardGridItem">
+                        <button onclick="typeLetter(this.id);" id="r" class="keyboardGridButton">r</button>
+                    </div>
+                    <div class="keyboardGridItem">
+                        <button onclick="typeLetter(this.id);" id="t" class="keyboardGridButton">t</button>
+                    </div>
+                    <div class="keyboardGridItem">
+                        <button onclick="typeLetter(this.id);" id="y" class="keyboardGridButton">y</button>
+                    </div>
+                    <div class="keyboardGridItem">
+                        <button onclick="typeLetter(this.id);" id="u" class="keyboardGridButton">u</button>
+                    </div>
+                    <div class="keyboardGridItem">
+                        <button onclick="typeLetter(this.id);" id="i" class="keyboardGridButton">i</button>
+                    </div>
+                    <div class="keyboardGridItem">
+                        <button onclick="typeLetter(this.id);" id="o" class="keyboardGridButton">o</button>
+                    </div>
+                    <div class="keyboardGridItem">
+                        <button onclick="typeLetter(this.id);" id="p" class="keyboardGridButton">p</button>
+                    </div>
+                    <div class="keyboardGridItem">
+                        <button onclick="typeLetter(this.id);" id="a" class="keyboardGridButton">a</button>
+                    </div>
+                    <div class="keyboardGridItem">
+                        <button onclick="typeLetter(this.id);" id="s" class="keyboardGridButton">s</button>
+                    </div>
+                    <div class="keyboardGridItem">
+                        <button onclick="typeLetter(this.id);" id="d" class="keyboardGridButton">d</button>
+                    </div>
+                    <div class="keyboardGridItem">
+                        <button onclick="typeLetter(this.id);" id="f" class="keyboardGridButton">f</button>
+                    </div>
+                    <div class="keyboardGridItem">
+                        <button onclick="typeLetter(this.id);" id="g" class="keyboardGridButton">g</button>
+                    </div>
+                    <div class="keyboardGridItem">
+                        <button onclick="typeLetter(this.id);" id="h" class="keyboardGridButton">h</button>
+                    </div>
+                    <div class="keyboardGridItem">
+                        <button onclick="typeLetter(this.id);" id="j" class="keyboardGridButton">j</button>
+                    </div>
+                    <div class="keyboardGridItem">
+                        <button onclick="typeLetter(this.id);" id="k" class="keyboardGridButton">k</button>
+                    </div>
+                    <div class="keyboardGridItem">
+                        <button onclick="typeLetter(this.id);" id="l" class="keyboardGridButton">l</button>
+                    </div>
+                    <div class="keyboardGridItem">
+                        <button onclick="typeLetter(this.id);" id="z" class="keyboardGridButton">z</button>
+                    </div>
+                    <div class="keyboardGridItem">
+                    </div>
+                    <div class="keyboardGridItem">
+                    </div>
+                    <div class="keyboardGridItem">
+                        <button onclick="typeLetter(this.id);" id="x" class="keyboardGridButton">x</button>
+                    </div>
+                    <div class="keyboardGridItem">
+                        <button onclick="typeLetter(this.id);" id="c" class="keyboardGridButton">c</button>
+                    </div>
+                    <div class="keyboardGridItem">
+                        <button onclick="typeLetter(this.id);" id="v" class="keyboardGridButton">v</button>
+                    </div>
+                    <div class="keyboardGridItem">
+                        <button onclick="typeLetter(this.id);" id="b" class="keyboardGridButton">b</button>
+                    </div>
+                    <div class="keyboardGridItem">
+                        <button onclick="typeLetter(this.id);" id="n" class="keyboardGridButton">n</button>
+                    </div>
+                    <div class="keyboardGridItem">
+                        <button onclick="typeLetter(this.id);" id="m" class="keyboardGridButton">m</button>
+                </div>
+                    </div>
+                </div>
+                <div class="passwordInput" id="passwordInput">
+                    <input type="text" placeholder="Enter password..." value="" id="password" name="password" style="width: 45vw; font-size: 1.5vw; display: block; margin-left: auto; margin-right: auto; padding: 1vw 1vw; background-color: #000014; color: #ffffff; border: solid #ffffff; border-radius: 1vw;"><br>
+                    <button onclick="submitPassword();" id="submitPasswordButton" class="submitPasswordButton">Submit</button>
+                    <p style="font-size: 1.5vw; font-family: 'Source Code Pro', 'Courier New', Courier, monospace; color: #ff6666; text-align: center;" id="passwordRequirementMessage"></p>
+                </div>
+            </div>
+            <div class="slider" id="slider">
+                <h2 style="font-size: 2vw; font-family: 'Source Code Pro', 'Courier New', Courier, monospace; color: #ffffff; text-align: center;">"Slider"</h2>
+                <p data-letter="" style="font-size: 1.5vw; font-family: 'Source Code Pro', 'Courier New', Courier, monospace; color: #ffffff; text-align: center;" id="sliderOutput"></p>
+                <div class="slidecontainer">
+                    <input oninput="sliderUpdate();" style="width: 45vw; display: block; margin-left: auto; margin-right: auto;" type="range" min="0" max="25" value="0" class="slider" id="letterSlider">
+                </div>
+                <button onclick="submitSlider();" id="submitPasswordButton" class="submitSliderButton">Submit</button>
+            </div>
+            <div class="scramble" id="scramble">
+                <h2 style="font-size: 2vw; font-family: 'Source Code Pro', 'Courier New', Courier, monospace; color: #ffffff; text-align: center;">"Scramble"</h2>
+                <div class="keyboardGrid" id="scramblekeyboardGrid" style="display: grid; grid-template-columns: 3.5vw 3.5vw 3.5vw 3.5vw 3.5vw 3.5vw 3.5vw 3.5vw 3.5vw 3.5vw; margin-left: auto; margin-right: auto; width: 30vw;">
+                    <div class="keyboardGridItem" id="ScrambleKey1">
+                        <button onclick="typeLetter(this.id); scrambleKeyboard();" id="q" class="keyboardGridButton">q</button>
+                    </div>
+                    <div class="keyboardGridItem" id="ScrambleKey2">
+                        <button onclick="typeLetter(this.id); scrambleKeyboard();" id="w" class="keyboardGridButton">w</button>
+                    </div>
+                    <div class="keyboardGridItem" id="ScrambleKey3">
+                        <button onclick="typeLetter(this.id); scrambleKeyboard();" id="e" class="keyboardGridButton">e</button>
+                    </div>
+                    <div class="keyboardGridItem" id="ScrambleKey4">
+                        <button onclick="typeLetter(this.id); scrambleKeyboard();" id="r" class="keyboardGridButton">r</button>
+                    </div>
+                    <div class="keyboardGridItem" id="ScrambleKey5">
+                        <button onclick="typeLetter(this.id); scrambleKeyboard();" id="t" class="keyboardGridButton">t</button>
+                    </div>
+                    <div class="keyboardGridItem" id="ScrambleKey6">
+                        <button onclick="typeLetter(this.id); scrambleKeyboard();" id="y" class="keyboardGridButton">y</button>
+                    </div>
+                    <div class="keyboardGridItem" id="ScrambleKey7">
+                        <button onclick="typeLetter(this.id); scrambleKeyboard();" id="u" class="keyboardGridButton">u</button>
+                    </div>
+                    <div class="keyboardGridItem" id="ScrambleKey8">
+                        <button onclick="typeLetter(this.id); scrambleKeyboard();" id="i" class="keyboardGridButton">i</button>
+                    </div>
+                    <div class="keyboardGridItem" id="ScrambleKey9">
+                        <button onclick="typeLetter(this.id); scrambleKeyboard();" id="o" class="keyboardGridButton">o</button>
+                    </div>
+                    <div class="keyboardGridItem" id="ScrambleKey10">
+                        <button onclick="typeLetter(this.id); scrambleKeyboard();" id="p" class="keyboardGridButton">p</button>
+                    </div>
+                    <div class="keyboardGridItem" id="ScrambleKey11">
+                        <button onclick="typeLetter(this.id); scrambleKeyboard();" id="a" class="keyboardGridButton">a</button>
+                    </div>
+                    <div class="keyboardGridItem" id="ScrambleKey12">
+                        <button onclick="typeLetter(this.id); scrambleKeyboard();" id="s" class="keyboardGridButton">s</button>
+                    </div>
+                    <div class="keyboardGridItem" id="ScrambleKey13">
+                        <button onclick="typeLetter(this.id); scrambleKeyboard();" id="d" class="keyboardGridButton">d</button>
+                    </div>
+                    <div class="keyboardGridItem" id="ScrambleKey14">
+                        <button onclick="typeLetter(this.id); scrambleKeyboard();" id="f" class="keyboardGridButton">f</button>
+                    </div>
+                    <div class="keyboardGridItem" id="ScrambleKey15">
+                        <button onclick="typeLetter(this.id); scrambleKeyboard();" id="g" class="keyboardGridButton">g</button>
+                    </div>
+                    <div class="keyboardGridItem" id="ScrambleKey16">
+                        <button onclick="typeLetter(this.id); scrambleKeyboard();" id="h" class="keyboardGridButton">h</button>
+                    </div>
+                    <div class="keyboardGridItem" id="ScrambleKey17">
+                        <button onclick="typeLetter(this.id); scrambleKeyboard();" id="j" class="keyboardGridButton">j</button>
+                    </div>
+                    <div class="keyboardGridItem" id="ScrambleKey18">
+                        <button onclick="typeLetter(this.id); scrambleKeyboard();" id="k" class="keyboardGridButton">k</button>
+                    </div>
+                    <div class="keyboardGridItem" id="ScrambleKey19">
+                        <button onclick="typeLetter(this.id); scrambleKeyboard();" id="l" class="keyboardGridButton">l</button>
+                    </div>
+                    <div class="keyboardGridItem" id="ScrambleKey20">
+                        <button onclick="typeLetter(this.id); scrambleKeyboard();" id="z" class="keyboardGridButton">z</button>
+                    </div>
+                    <div class="keyboardGridItem">
+                    </div>
+                    <div class="keyboardGridItem">
+                    </div>
+                    <div class="keyboardGridItem" id="ScrambleKey21">
+                        <button onclick="typeLetter(this.id); scrambleKeyboard();" id="x" class="keyboardGridButton">x</button>
+                    </div>
+                    <div class="keyboardGridItem" id="ScrambleKey22">
+                        <button onclick="typeLetter(this.id); scrambleKeyboard();" id="c" class="keyboardGridButton">c</button>
+                    </div>
+                    <div class="keyboardGridItem" id="ScrambleKey23">
+                        <button onclick="typeLetter(this.id); scrambleKeyboard();" id="v" class="keyboardGridButton">v</button>
+                    </div>
+                    <div class="keyboardGridItem" id="ScrambleKey24">
+                        <button onclick="typeLetter(this.id); scrambleKeyboard();" id="b" class="keyboardGridButton">b</button>
+                    </div>
+                    <div class="keyboardGridItem" id="ScrambleKey25">
+                        <button onclick="typeLetter(this.id); scrambleKeyboard();" id="n" class="keyboardGridButton">n</button>
+                    </div>
+                    <div class="keyboardGridItem" id="ScrambleKey26">
+                        <button onclick="typeLetter(this.id); scrambleKeyboard();" id="m" class="keyboardGridButton">m</button>
+                </div>
+                </div>
+            </div>
+            <div class="higherlower" id="higherlower">
+                <h2 style="font-size: 2vw; font-family: 'Source Code Pro', 'Courier New', Courier, monospace; color: #ffffff; text-align: center;">"Play Your Letters Right"</h2>
+                <p data-letter="a" style="font-size: 1.5vw; font-family: 'Source Code Pro', 'Courier New', Courier, monospace; color: #ffffff; text-align: center;" id="pylrOutput">a</p>
+                <button onclick="pylrChange('h');" id="pylrHigher" class="pylrButton">Higher</button>
+                <button onclick="submitPylr();" id="pylrSubmit" class="pylrButton">Submit</button>
+                <button onclick="pylrChange('l');" id="pylrLower" class="pylrButton">Lower</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<!--TODO-->
+<!--
+    - Finish all inputs
+    - Put an input selector in
+    - Put game mechanics in
+    - Write wordlist (maybe all negative?)
+    - Put in some nice decoration
+    - Don't forget credits! Figure out some sort of contact email.
+-->
+
+<!--
+CREDITS:
+- Wordlist: https://github.com/dwyl/english-words
+-->
