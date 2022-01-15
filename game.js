@@ -36,10 +36,6 @@ function unhideElement(id) {
 }
 
 /* GAME CONTROLS */
-let currentLevel = 1
-let enteredLetters = []
-const inputMethods = ["rotaryPhoneDIV","randomLetter","binaryInput","passwordKeyboard","slider","scramble","higherlower"]
-let inputMethod = ""
 
 function chooseInput() {
     inputMethod = inputMethods[Math.floor(Math.random()*inputMethods.length)];
@@ -109,141 +105,49 @@ function chooseInput() {
     }
 }
 
+let currentLevel = 1
+let enteredLetters = []
+const inputMethods = ["rotaryPhoneDIV","randomLetter","binaryInput","passwordKeyboard","slider","scramble","higherlower"]
+let inputMethod = ""
+
+function debug() {
+    console.log("DEBUG PRINTOUT:")
+    console.log(`Current word: ${word}`)
+    console.log(`Current letters: ${enteredLetters}`)
+    console.log(`Current level: ${currentLevel}`)
+    console.log(`Current input method: ${inputMethod}`)
+}
+
 function backspace() {
-    if (enteredLetters.length == 1) {
-        enteredLetters = []
-        updateOutput();
-    } else {
-        enteredLetters.splice(-1, 1);
-        updateOutput();
-    }
 }
 
 function checkLetters() {
-    if (enteredLetters.length == 5) {
-        let appearedLetters = word.split("");
-        let greenFound = [1,2,3,4,5]
-        console.log(word)
-        if (enteredLetters[0] == appearedLetters[0]) {
-            var position = appearedLetters.indexOf(enteredLetters[0], 0);
-            appearedLetters.splice(position, 1);
-            greenFound.splice(position, 1);
-            document.getElementById(`r${currentLevel}c1td`).style.backgroundColor = "#3afc7e";
-        }
-
-        if (enteredLetters[1] == appearedLetters[1]) {
-            var position = appearedLetters.indexOf(enteredLetters[1], 0);
-            appearedLetters.splice(position, 1, "*");
-            greenFound.splice(position, 1);
-            document.getElementById(`r${currentLevel}c2td`).style.backgroundColor = "#3afc7e";
-        }
-
-        if (enteredLetters[2] == appearedLetters[2]) {
-            var position = appearedLetters.indexOf(enteredLetters[2], 0);
-            appearedLetters.splice(position, 1, "*");
-            greenFound.splice(position, 1);
-            document.getElementById(`r${currentLevel}c3td`).style.backgroundColor = "#3afc7e";
-        }
-
-        if (enteredLetters[3] == appearedLetters[3]) {
-            var position = appearedLetters.indexOf(enteredLetters[3], 0);
-            appearedLetters.splice(position, 1, "*");
-            greenFound.splice(position, 1);
-            document.getElementById(`r${currentLevel}c4td`).style.backgroundColor = "#3afc7e";
-        }
-
-        if (enteredLetters[4] == appearedLetters[4]) {
-            var position = appearedLetters.indexOf(enteredLetters[4], 0);
-            appearedLetters.splice(position, 1, "*");
-            greenFound.splice(position, 1);
-            document.getElementById(`r${currentLevel}c5td`).style.backgroundColor = "#3afc7e";
-            console.log(appearedLetters);
-            console.log(greenFound);
-        }
-
-        for (let charposition = 0; charposition < greenFound.length;) {
-            if (appearedLetters.join("").includes(enteredLetters[greenFound[charposition]])) {
-                var position = appearedLetters.indexOf(enteredLetters[greenFound[charposition]], 0);
-                appearedLetters.splice(position, 1, "*");
-                document.getElementById(`r${currentLevel}c1td`).style.backgroundColor = "#fcd23a";
-                console.log(appearedLetters);
-                console.log(greenFound);
-                charposition += 1;
-            }
-        }
-
-        if (word == enteredLetters.join("")) {
-            hideElement("rotaryPhoneDIV")
-            hideElement("randomLetter")
-            hideElement("binaryInput")
-            hideElement("passwordKeyboard")
-            hideElement("slider")
-            hideElement("scramble")
-            hideElement("higherlower")
-            hideElement("keyboardContainer")
-            hideElement("passwordInput")
-        } else {
-            chooseInput();
-        }
-        
-    }
 }
 
 function enter() {
-    if (enteredLetters.length == 5) {
-        checkLetters()
-        if (currentLevel < 6) {
-            enteredLetters = []
-            currentLevel += 1
-        }
-    }
+    if (enteredLetters.length == 5 && currentLevel < 5) {
+        checkLetters();
+        enteredLetters = []
+        currentLevel += 1;
+    } else if (enteredLetters.length == 5 && currentLevel == 5) {
+        --
+    } else {}
 }
 
 function updateOutput() {
-    if (enteredLetters.length == 0) {
-        document.getElementById(`r${currentLevel}c1`).innerHTML = "";
-        document.getElementById(`r${currentLevel}c2`).innerHTML = "";
-        document.getElementById(`r${currentLevel}c3`).innerHTML = "";
-        document.getElementById(`r${currentLevel}c4`).innerHTML = "";
-        document.getElementById(`r${currentLevel}c5`).innerHTML = "";
-    } else if (enteredLetters.length == 1) {
-        document.getElementById(`r${currentLevel}c1`).innerHTML = enteredLetters[0].toUpperCase();
-        document.getElementById(`r${currentLevel}c2`).innerHTML = "";
-        document.getElementById(`r${currentLevel}c3`).innerHTML = "";
-        document.getElementById(`r${currentLevel}c4`).innerHTML = "";
-        document.getElementById(`r${currentLevel}c5`).innerHTML = "";
-    } else if (enteredLetters.length == 2) {
-        document.getElementById(`r${currentLevel}c1`).innerHTML = enteredLetters[0].toUpperCase();
-        document.getElementById(`r${currentLevel}c2`).innerHTML = enteredLetters[1].toUpperCase();
-        document.getElementById(`r${currentLevel}c3`).innerHTML = "";
-        document.getElementById(`r${currentLevel}c4`).innerHTML = "";
-        document.getElementById(`r${currentLevel}c5`).innerHTML = "";
-    } else if (enteredLetters.length == 3) {
-        document.getElementById(`r${currentLevel}c1`).innerHTML = enteredLetters[0].toUpperCase();
-        document.getElementById(`r${currentLevel}c2`).innerHTML = enteredLetters[1].toUpperCase();
-        document.getElementById(`r${currentLevel}c3`).innerHTML = enteredLetters[2].toUpperCase();
-        document.getElementById(`r${currentLevel}c4`).innerHTML = "";
-        document.getElementById(`r${currentLevel}c5`).innerHTML = "";
-    } else if (enteredLetters.length == 4) {
-        document.getElementById(`r${currentLevel}c1`).innerHTML = enteredLetters[0].toUpperCase();
-        document.getElementById(`r${currentLevel}c2`).innerHTML = enteredLetters[1].toUpperCase();
-        document.getElementById(`r${currentLevel}c3`).innerHTML = enteredLetters[2].toUpperCase();
-        document.getElementById(`r${currentLevel}c4`).innerHTML = enteredLetters[3].toUpperCase();
-        document.getElementById(`r${currentLevel}c5`).innerHTML = "";
-    } else if (enteredLetters.length == 5) {
-        document.getElementById(`r${currentLevel}c1`).innerHTML = enteredLetters[0].toUpperCase();
-        document.getElementById(`r${currentLevel}c2`).innerHTML = enteredLetters[1].toUpperCase();
-        document.getElementById(`r${currentLevel}c3`).innerHTML = enteredLetters[2].toUpperCase();
-        document.getElementById(`r${currentLevel}c4`).innerHTML = enteredLetters[3].toUpperCase();
-        document.getElementById(`r${currentLevel}c5`).innerHTML = enteredLetters[4].toUpperCase();
+    for (let column = 0; column < enteredLetters.length; column++) {
+        document.getElementById(`r${currentLevel}c${column+1}`).innerHTML = enteredLetters[column].toUpperCase();
     }
 }
 
 function submitLetter(letter) {
     if (enteredLetters.length < 5) {
-        enteredLetters.push(letter)
+        enteredLetters.push(letter);
+        updateOutput();
+    } else {
+        console.log(`Error, cannot push ${letter} to array, array already has ${enteredLetters.length} letters.`);
+        updateOutput();
     }
-    updateOutput();
 }
 
 function refresh() {
@@ -253,10 +157,8 @@ function refresh() {
 }
 
 function startGame() {
-        chooseInput();
-        var keys = Object.keys(wordlist);
-        word = wordlist[keys[ keys.length * Math.random() << 0]];
-        console.log(word)
+    currentLevel = 1;
+    enteredLetters = []
 }
 
 

@@ -18,3 +18,17 @@ IGNORE * Keyboard made up of IPA sounds only
 * Letters scroll by. Correct letter must be pressed when in crosshairs.
 DONE * Keyboard scrambles after every key.
 DONE* Higher/lower - play your cards right.
+
+Add a letter to the array if there are less than 5.
+
+Update the output to show the current array at the current level.
+
+	Backspace removes the last letter and updates the output.
+
+If enter is pressed:
+    check there are 5 letters in the array
+    check if word matches,
+    if not, check each letter to its position
+    for every letter that matches, replace its position in the word with a star.
+    once all direct matches have been checked, remove the stars and iterate through remaining unmatched letters to see if they appear in the target word (excluding already matched letters)
+    every time an indirect match is found, remove that letter from the source word
