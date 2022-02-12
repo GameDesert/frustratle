@@ -9,6 +9,9 @@ var xmlhttp = new XMLHttpRequest();
 xmlhttp.open("GET", "wordlist.json", true);
 xmlhttp.send();
 
+
+const colour_YELLOW = "fccf05";
+const colour_GREEN = "05fc57";
 let wordlist = {}
 let word = ""
 function writeToWordlist(wordlistinput) {
@@ -118,19 +121,36 @@ function debug() {
     console.log(`Current input method: ${inputMethod}`)
 }
 
+function endGame() {
+
+}
+
 function backspace() {
 }
 
-function checkLetters() {
+function checkLetters(enteredLetters_cL) {
+    if (enteredLetters_cL.join("") == word) {
+        endGame();
+    } else {
+        let wordToCheck = word.split("");
+        console.log(wordToCheck);
+        for (let currentChar = 0; currentChar < enteredLetters.length;) {
+            if (enteredLetters_cL[currentChar] == wordToCheck[currentChar]) {
+                wordToCheck[currentChar] = "*";
+                document.getElementById(`r${currentLevel}c${currentChar+1}td`).style.backgroundColor = `#${colour_GREEN}`;
+            }
+            currentChar += 1;
+        }
+    }
 }
 
 function enter() {
     if (enteredLetters.length == 5 && currentLevel < 5) {
-        checkLetters();
-        enteredLetters = []
+        checkLetters(enteredLetters);
+        enteredLetters = [];
         currentLevel += 1;
     } else if (enteredLetters.length == 5 && currentLevel == 5) {
-        --
+        checkLetters();
     } else {}
 }
 
