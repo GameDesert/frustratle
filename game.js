@@ -122,22 +122,56 @@ function debug() {
 }
 
 function endGame() {
+    document.getElementById("keyboardContainer").remove();
+    document.getElementById("rotaryPhoneDIV").remove();
+    document.getElementById("randomLetter").remove();
+    document.getElementById("binaryInput").remove();
+    document.getElementById("passwordKeyboard").remove();
+    document.getElementById("slider").remove();
+    document.getElementById("scramble").remove();
+    document.getElementById("higherlower").remove();
 
+    document.getElementById(`r${currentLevel}c1td`).style.backgroundColor = `#${colour_GREEN}`;
+    document.getElementById(`r${currentLevel}c2td`).style.backgroundColor = `#${colour_GREEN}`;
+    document.getElementById(`r${currentLevel}c3td`).style.backgroundColor = `#${colour_GREEN}`;
+    document.getElementById(`r${currentLevel}c4td`).style.backgroundColor = `#${colour_GREEN}`;
+    document.getElementById(`r${currentLevel}c5td`).style.backgroundColor = `#${colour_GREEN}`;
 }
 
 function backspace() {
+    enteredLetters.pop();
+    updateOutput();
 }
 
 function checkLetters(enteredLetters_cL) {
     if (enteredLetters_cL.join("") == word) {
         endGame();
+        console.log("FULL WORD");
     } else {
+        console.log("NOT FULL WORD");
         let wordToCheck = word.split("");
         console.log(wordToCheck);
         for (let currentChar = 0; currentChar < enteredLetters.length;) {
             if (enteredLetters_cL[currentChar] == wordToCheck[currentChar]) {
                 wordToCheck[currentChar] = "*";
+                enteredLetters_cL[currentChar] = "*";
                 document.getElementById(`r${currentLevel}c${currentChar+1}td`).style.backgroundColor = `#${colour_GREEN}`;
+                console.log(wordToCheck);
+                console.log(enteredLetters);
+            }
+            currentChar += 1;
+        }
+
+        for (let currentChar = 0; currentChar < enteredLetters.length;) {
+            if (enteredLetters_cL[currentChar] !== "*") {
+                if (wordToCheck.indexOf(enteredLetters_cL[currentChar]) !== -1) {
+                    wordToCheck[wordToCheck.indexOf(enteredLetters_cL[currentChar])] = "*";
+                    enteredLetters_cL[currentChar] = "*";
+                    console.log(wordToCheck);
+                    console.log(enteredLetters);
+
+                    document.getElementById(`r${currentLevel}c${currentChar+1}td`).style.backgroundColor = `#${colour_YELLOW}`;
+                }
             }
             currentChar += 1;
         }
@@ -145,18 +179,25 @@ function checkLetters(enteredLetters_cL) {
 }
 
 function enter() {
-    if (enteredLetters.length == 5 && currentLevel < 5) {
+    if (enteredLetters.length == 5 && currentLevel < 6) {
         checkLetters(enteredLetters);
         enteredLetters = [];
         currentLevel += 1;
+        chooseInput();
     } else if (enteredLetters.length == 5 && currentLevel == 5) {
         checkLetters();
-    } else {}
+    }
 }
 
 function updateOutput() {
-    for (let column = 0; column < enteredLetters.length; column++) {
-        document.getElementById(`r${currentLevel}c${column+1}`).innerHTML = enteredLetters[column].toUpperCase();
+    for (let column = 0; column < 5;) {
+        if (column < enteredLetters.length) {
+            letterToChange = enteredLetters[column]
+        } else {
+            letterToChange = "";
+        }
+        document.getElementById(`r${currentLevel}c${column+1}`).innerHTML = letterToChange.toUpperCase();
+        column++
     }
 }
 
@@ -178,7 +219,9 @@ function refresh() {
 
 function startGame() {
     currentLevel = 1;
-    enteredLetters = []
+    enteredLetters = [];
+    word = wordlist[Math.floor(Math.random()*Object.keys(wordlist).length)];
+    chooseInput();
 }
 
 
