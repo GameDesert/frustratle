@@ -415,12 +415,12 @@ function checkLetters(enteredLetters_cL) {
 }
 
 function enter() {
-    if (enteredLetters.length == 5 && currentLevel < 6) {
+    if (enteredLetters.length == 5 && currentLevel <= 6) {
         checkLetters(enteredLetters);
         enteredLetters = [];
         currentLevel += 1;
         chooseInput();
-    } else if (enteredLetters.length == 5 && currentLevel == 5) {
+    } else if (enteredLetters.length == 5 && currentLevel == 6) {
         checkLetters();
     }
 }
