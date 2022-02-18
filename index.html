@@ -41,7 +41,7 @@
         }
     </script>
 </head>
-<body style="background-color: #000014; margin: 0; overflow: hidden;">
+<body style="background-color: #000014; margin: 0; overflow-y: scroll; overflow-x: hidden;">
     <div>
         <svg
         style="width: 100vw; height: auto;"
@@ -63,6 +63,27 @@
         </svg>
         <p style="font-size: 1.5vw; font-family: 'Source Code Pro', 'Courier New', Courier, monospace; color: #ffffff; text-align: center;">This game is best played on a PC, or other large-screened device.</p>
         <button onclick="startGame();" style="cursor: pointer; padding: 1vw 1vw; border-radius: 1vw; font-size: 1.5vw; display: block; margin-left: auto; margin-right: auto;" id="startGame">Start Game</button>
+        <br>
+        <details style="font-size: 1.25vw; font-family: 'Source Code Pro', 'Courier New', Courier, monospace; color: #ffffff; text-align: center;">
+            <summary>How to play...</summary>
+            <p>You have 6 tries to guess the word.<br>If a letter is in the right place, it will turn <span style="color: #000014; background-color: #05fc57;">green</span>.<br>Letters that appear in the word but are not in the correct position will turn <span style="color: #000014; background-color: #fccf05;">yellow</span>.<br>Letters that don't appear in the word will not change colour.<hr>For each row of letters, you must use the input method on the right-hand side of the screen.</p>
+            <dl>
+                <dt><b>Rotary Phone</b></dt>
+                <dd>Click each letter and wait for it to dial.</dd>
+                <dt><b>Random Letter</b></dt>
+                <dd>Pick random letters until your desired letter appears, then press the submit button.</dd>
+                <dt><b>Binary</b></dt>
+                <dd>Enter the letter's numerical value in binary.</dd>
+                <dt><b>Password</b></dt>
+                <dd>Enter a password that satisfies the requirements to unlock the keyboard.</dd>
+                <dt><b>Slider</b></dt>
+                <dd>Move the slider to find your letter, then press the submit button.</dd>
+                <dt><b>Scramble</b></dt>
+                <dd>This keyboard doesn't follow a standard layout.</dd>
+                <dt><b>Higher or Lower</b></dt>
+                <dd>Narrow down your search by selecting if your letter appears higher (towards the end) or lower (towards the start) of the alphabet. Press submit when your letter appears.</dd>
+              </dl> 
+        </details>
     </div>
 </body>
 </html>

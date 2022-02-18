@@ -127,7 +127,15 @@ function chooseInput() {
         hideElement("passwordInput")
         scrambleKeyboard()
     } else if (inputMethod == "higherlower") {
-
+        hideElement("rotaryPhoneDIV")
+        hideElement("randomLetter")
+        hideElement("binaryInput")
+        hideElement("passwordKeyboard")
+        hideElement("slider")
+        hideElement("scramble")
+        unhideElement("higherlower")
+        hideElement("keyboardContainer")
+        hideElement("passwordInput")
     }
 }
 
