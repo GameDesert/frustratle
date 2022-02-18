@@ -167,6 +167,8 @@ function endGame() {
     document.getElementById(`r${currentLevel}c3td`).style.backgroundColor = `#${colour_GREEN}`;
     document.getElementById(`r${currentLevel}c4td`).style.backgroundColor = `#${colour_GREEN}`;
     document.getElementById(`r${currentLevel}c5td`).style.backgroundColor = `#${colour_GREEN}`;
+
+    genShareout();
 }
 
 function backspace() {
