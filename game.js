@@ -17,7 +17,7 @@ let word = ""
 let shareout = []
 
 function genShareout() {
-    for (let so_row = 0; so_row < currentLevel-1;) {
+    for (let so_row = 0; so_row < 5;) {
 
         for (let so_col = 0; so_col < 5;) {
             if (document.getElementById(`r${so_row+1}c${so_col+1}td`).style.backgroundColor == `rgb(5, 252, 87)`) {
@@ -286,7 +286,7 @@ const randomLetter = document.getElementById("randomLetter");
 function pickRandomLetter() {
     const randomLetterOutput = document.getElementById("randomLetterOutput");
     const alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
-    const randomLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
+    let randomLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
     randomLetterOutput.innerHTML = randomLetter;
     randomLetterOutput.setAttribute("data-letter",randomLetter);
 }
