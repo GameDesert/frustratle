@@ -17,21 +17,224 @@ let word = ""
 let shareout = []
 
 function genShareout() {
-    for (let so_row = 0; so_row < 5;) {
+    console.log(document.getElementById("r1c1td").style.backgroundColor)
+    if (document.getElementById("r1c1td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r1c1td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r1c1td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    if (document.getElementById("r1c2td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r1c2td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r1c2td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    if (document.getElementById("r1c3td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r1c3td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r1c3td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    if (document.getElementById("r1c4td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r1c4td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r1c4td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    if (document.getElementById("r1c5td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r1c5td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r1c5td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    shareout.push('<br>');
+    if (document.getElementById("r2c1td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r2c1td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r2c1td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
 
-        for (let so_col = 0; so_col < 5;) {
-            if (document.getElementById(`r${so_row+1}c${so_col+1}td`).style.backgroundColor == `rgb(5, 252, 87)`) {
-                shareout.push('🟩');
-            } else if (document.getElementById(`r${so_row+1}c${so_col+1}td`).style.backgroundColor == `rgb(252, 207, 5)`) {
-                shareout.push('🟨');
-            } else if (document.getElementById(`r${so_row+1}c${so_col+1}td`).style.backgroundColor == "") {
-                shareout.push('⬛');
-            }
-            so_col++
-        }
-        shareout.push('<br>');
-        so_row++
-      }
+    if (document.getElementById("r2c2td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r2c2td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r2c2td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    if (document.getElementById("r2c3td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r2c3td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r2c3td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    if (document.getElementById("r2c4td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r2c4td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r2c4td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    if (document.getElementById("r2c5td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r2c5td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r2c5td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    shareout.push('<br>');
+    if (document.getElementById("r3c1td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+     } else if (document.getElementById("r3c1td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r3c1td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    if (document.getElementById("r3c2td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r3c2td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r3c2td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    if (document.getElementById("r3c3td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r3c3td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r3c3td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    if (document.getElementById("r3c4td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r3c4td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r3c4td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    if (document.getElementById("r3c5td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r3c5td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r3c5td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    shareout.push('<br>');
+    if (document.getElementById("r4c1td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r4c1td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r4c1td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    if (document.getElementById("r4c2td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r4c2td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r4c2td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    if (document.getElementById("r4c3td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r4c3td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r4c3td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    if (document.getElementById("r4c4td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r4c4td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r4c4td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    if (document.getElementById("r4c5td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r4c5td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r4c5td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    shareout.push('<br>');
+    if (document.getElementById("r5c1td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r5c1td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r5c1td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    if (document.getElementById("r5c2td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r5c2td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r5c2td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    if (document.getElementById("r5c3td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r5c3td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r5c3td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    if (document.getElementById("r5c4td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r5c4td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r5c4td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    if (document.getElementById("r5c5td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r5c5td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r5c5td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    shareout.push('<br>');
+    if (document.getElementById("r6c1td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r6c1td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r6c1td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    if (document.getElementById("r6c2td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r6c2td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r6c2td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    if (document.getElementById("r6c3td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r6c3td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r6c3td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    if (document.getElementById("r6c4td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r6c4td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r6c4td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    if (document.getElementById("r6c5td").style.backgroundColor == "rgb(5, 252, 87)") {
+        shareout.push('🟩');
+    } else if (document.getElementById("r6c5td").style.backgroundColor == "rgb(252, 207, 5)") {
+        shareout.push('🟨');
+    } else if (document.getElementById("r6c5td").style.backgroundColor == "") {
+        shareout.push('⬛');
+    }
+    shareout.push('<br>');
     
     unhideElement("shareSheet");
     document.getElementById("shareoutput").innerHTML = shareout.join("");
@@ -162,13 +365,13 @@ function endGame() {
     document.getElementById("scramble").remove();
     document.getElementById("higherlower").remove();
 
-    genShareout();
-
     document.getElementById(`r${currentLevel}c1td`).style.backgroundColor = `#${colour_GREEN}`;
     document.getElementById(`r${currentLevel}c2td`).style.backgroundColor = `#${colour_GREEN}`;
     document.getElementById(`r${currentLevel}c3td`).style.backgroundColor = `#${colour_GREEN}`;
     document.getElementById(`r${currentLevel}c4td`).style.backgroundColor = `#${colour_GREEN}`;
     document.getElementById(`r${currentLevel}c5td`).style.backgroundColor = `#${colour_GREEN}`;
+
+    genShareout();
 }
 
 function backspace() {
