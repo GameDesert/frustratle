@@ -136,13 +136,13 @@ let enteredLetters = []
 const inputMethods = ["rotaryPhoneDIV","randomLetter","binaryInput","passwordKeyboard","slider","scramble","higherlower"]
 let inputMethod = ""
 
-function debug() {
+/*function debug() {
     console.log("DEBUG PRINTOUT:")
     console.log(`Current word: ${word}`)
     console.log(`Current letters: ${enteredLetters}`)
     console.log(`Current level: ${currentLevel}`)
     console.log(`Current input method: ${inputMethod}`)
-}
+}*/
 
 function endGame() {
     document.getElementById("keyboardContainer").remove();
@@ -169,18 +169,18 @@ function backspace() {
 function checkLetters(enteredLetters_cL) {
     if (enteredLetters_cL.join("") == word) {
         endGame();
-        console.log("FULL WORD");
+        /*console.log("FULL WORD");*/
     } else {
-        console.log("NOT FULL WORD");
+        /*console.log("NOT FULL WORD");*/
         let wordToCheck = word.split("");
-        console.log(wordToCheck);
+        /*console.log(wordToCheck);*/
         for (let currentChar = 0; currentChar < enteredLetters.length;) {
             if (enteredLetters_cL[currentChar] == wordToCheck[currentChar]) {
                 wordToCheck[currentChar] = "*";
                 enteredLetters_cL[currentChar] = "*";
                 document.getElementById(`r${currentLevel}c${currentChar+1}td`).style.backgroundColor = `#${colour_GREEN}`;
-                console.log(wordToCheck);
-                console.log(enteredLetters);
+                /*console.log(wordToCheck);*/
+                /*console.log(enteredLetters);*/
             }
             currentChar += 1;
         }
@@ -190,8 +190,8 @@ function checkLetters(enteredLetters_cL) {
                 if (wordToCheck.indexOf(enteredLetters_cL[currentChar]) !== -1) {
                     wordToCheck[wordToCheck.indexOf(enteredLetters_cL[currentChar])] = "*";
                     enteredLetters_cL[currentChar] = "*";
-                    console.log(wordToCheck);
-                    console.log(enteredLetters);
+                    /*console.log(wordToCheck);*/
+                    /*console.log(enteredLetters);*/
 
                     document.getElementById(`r${currentLevel}c${currentChar+1}td`).style.backgroundColor = `#${colour_YELLOW}`;
                 }
@@ -230,7 +230,7 @@ function submitLetter(letter) {
         enteredLetters.push(letter);
         updateOutput();
     } else {
-        console.log(`Error, cannot push ${letter} to array, array already has ${enteredLetters.length} letters.`);
+        /*console.log(`Error, cannot push ${letter} to array, array already has ${enteredLetters.length} letters.`);*/
         updateOutput();
     }
 }
@@ -262,7 +262,7 @@ function rotarySubmitLetters(id) {
         rotaryletters.style.transition = `5s`;
         rotaryletters.style.transform = `rotate(${letterAngles[id]}deg)`;
         sleep(5000).then(() => {
-            console.log(rotletter);
+            /*console.log(rotletter);*/
             submitLetter(rotletter);
             rotaryletters.style.transition = "1s";
             rotaryletters.style.transform = "rotate(-41.25deg)";
