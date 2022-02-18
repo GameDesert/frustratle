@@ -14,6 +14,29 @@ const colour_YELLOW = "fccf05";
 const colour_GREEN = "05fc57";
 let wordlist = {}
 let word = ""
+let shareout = []
+
+function genShareout() {
+    for (let so_row = 0; so_row < currentLevel-1;) {
+
+        for (let so_col = 0; so_col < 5;) {
+            if (document.getElementById(`r${so_row+1}c${so_col+1}td`).style.backgroundColor == `rgb(5, 252, 87)`) {
+                shareout.push('🟩');
+            } else if (document.getElementById(`r${so_row+1}c${so_col+1}td`).style.backgroundColor == `rgb(252, 207, 5)`) {
+                shareout.push('🟨');
+            } else if (document.getElementById(`r${so_row+1}c${so_col+1}td`).style.backgroundColor == "") {
+                shareout.push('⬛');
+            }
+            so_col++
+        }
+        shareout.push('<br>');
+        so_row++
+      }
+    
+    unhideElement("shareSheet");
+    document.getElementById("shareoutput").innerHTML = shareout.join("");
+}
+
 function writeToWordlist(wordlistinput) {
     wordlist = wordlistinput
 }
@@ -190,14 +213,15 @@ function enter() {
 }
 
 function updateOutput() {
-    for (let column = 0; column < 5;) {
-        if (column < enteredLetters.length) {
-            letterToChange = enteredLetters[column]
+    for (let uo_column = 0; uo_column < 5;) {
+        if (uo_column < enteredLetters.length) {
+            letterToChange = enteredLetters[uo_column]
         } else {
             letterToChange = "";
         }
-        document.getElementById(`r${currentLevel}c${column+1}`).innerHTML = letterToChange.toUpperCase();
-        column++
+
+        document.getElementById(`r${currentLevel}c${uo_column+1}`).innerHTML = letterToChange.toUpperCase();
+        uo_column = uo_column + 1
     }
 }
 
