@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /wordlist_maker.py
+Disallow: /.gitignore
+Disallow: /.gitattributes
+Disallow: /Pword Flow.odt
