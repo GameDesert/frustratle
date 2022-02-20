@@ -3,3 +3,4 @@ Disallow: /wordlist_maker.py
 Disallow: /.gitignore
 Disallow: /.gitattributes
 Disallow: /Pword Flow.odt
+Sitemap: https://frustratle.kotla.eu/sitemap.xml
